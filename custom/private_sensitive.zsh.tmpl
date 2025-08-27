@@ -1,0 +1,13 @@
+function push_notify {
+  PUSHOVER_API_USER={{ (bitwarden "item" "pushover API key").login.username }}
+  PUSHOVER_API_TOKEN={{ (bitwarden "item" "pushover API key").token.value }}
+  MESSAGE=$1
+  TITLE=${2:-push_notify}
+  curl -s \
+    --form-string "token=${PUSHOVER_API_TOKEN}" \
+    --form-string "user=${PUSHOVER_API_USER}" \
+    --form-string "message=${MESSAGE}" \
+    --form-string "title=${TITLE}" \
+    https://api.pushover.net/1/messages.json
+}
+
