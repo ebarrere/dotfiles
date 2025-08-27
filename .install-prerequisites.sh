@@ -1,16 +1,18 @@
 #!/bin/bash
-set -ex
+# set -ex
 
-if type keeper >/dev/null 2>&1; then
-    echo "Keeper cli is already installed"
+if type keeper &>/dev/null && type bw &>/dev/null; then
+    echo "Keeper and Bitwarden already installed"
 else
     case "$(uname -s)" in
     Darwin)
         brew install keeper-commander
+        brew install bitwarden-cli
         ;;
-    # Linux)
-    #     nix-env -iA nixpkgs.keeper-commander
-    #     ;;
+    Linux)
+        nix-env -iA nixpkgs.keeper-commander
+        nix-env -iA nixpkgs.bitwarden-cli
+        ;;
     *)
         echo "unsupported OS"
         exit 1
