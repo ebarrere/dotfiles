@@ -70,6 +70,7 @@ zstyle ':omz:update' mode disabled  # disable automatic updates
 # Load plugins
 plugins=(git direnv podman kind minikube)
 
+{{ if eq .chezmoi.os "darwin" -}}
 # If you have installed completions using Homebrew,
 # its completions may not be on your $FPATH if you are using the system zsh.
 # Homebrew installs zsh completion definitions to /usr/local/share/zsh/site-functions,
@@ -83,6 +84,7 @@ fi
 if (( ! ${fpath[(I)${BREW_PREFIX}/share/zsh-completions]} )); then
   FPATH="${BREW_PREFIX}/share/zsh-completions:$FPATH"
 fi
+{{ end -}}
 source $ZSH/oh-my-zsh.sh
 
 # User configuration

@@ -4,3 +4,6 @@ README.md
 {{- if not (has .chezmoi.hostname $ebHosts) }}
 .oh-my-zsh/custom/sensitive.zsh
 {{- end }}
+{{ if ne .chezmoi.os "darwin" -}}
+.oh-my-zsh/custom/brew.zsh
+{{- end}}
