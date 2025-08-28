@@ -186,3 +186,6 @@ packages:
       - "vagrant"
       - "virtualbox"
       - "yubico-authenticator"
+  linux:
+    nixpkgs:
+      - "zsh"
