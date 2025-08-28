@@ -1,5 +1,10 @@
+{{- $email := promptStringOnce . "email" "Email address" -}}
 [git]
     autoCommit = true
     autoPush = true
+[bitwarden]
+    unlock = "auto"
 [hooks.read-source-state.pre]
     command = ".local/share/chezmoi/.install-prerequisites.sh"
+[data]
+    email = {{ $email | quote }}
