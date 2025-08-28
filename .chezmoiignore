@@ -1,2 +1,6 @@
 .oh-my-zsh/cache
 README.md
+{{- $ebHosts := list "Ebarrere-Mac" "shiny" }}
+{{- if not (has .chezmoi.hostname $ebHosts) }}
+.oh-my-zsh/custom/sensitive.zsh
+{{- end }}
