@@ -188,4 +188,4 @@ packages:
       - "yubico-authenticator"
   linux:
     nixpkgs:
-      - "zsh"
+      - "nixpkgs.zsh"
