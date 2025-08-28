@@ -1,0 +1,2 @@
+#export SSH_AUTH_SOCK='/Users/elliott/Library/Application Support/Keeper Password Manager/keeper-ssh-agent.sock'
+export SSH_AUTH_SOCK='/var/folders/x4/hlpcp3y15x7395tvcqb906880000gq/T/keeper-ssh-agent.sock'

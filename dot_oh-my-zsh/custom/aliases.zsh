@@ -1,0 +1,63 @@
+# edit this file
+alias vialias='vi ~/.oh-my-zsh/custom/aliases.zsh'
+
+# alias cnt='cd ~/Documents/code/orion/containers'
+alias ls='ls -G'
+alias ll='ls -l'
+alias la='ls -la'
+alias tl='tr "[:upper:]" "[:lower:]"'
+alias tu='tr "[:lower:]" "[:upper:]"'
+alias dnl='tr -d "\n"'
+alias dcr='tr -d "\r"'
+alias nls='tr "\n" " "'
+alias nlsc='tr "\n" ";"'
+alias scnl='tr ";" "\n"'
+alias nlc='tr "\n" ","'
+alias nlp='tr "\n" "|"'
+alias cnl='tr "," "\n"'
+alias snl='tr " " "\n"'
+alias rnl='tr "\r" "\n"'
+alias ds='tr -d " "'
+alias dockerconsole='stty -echo -icanon && nc -U ~/Library/Containers/com.docker.docker/Data/debug-shell.sock && stty sane'
+alias ident-on="mv ~/bin/ssh.unused ~/bin/ssh"
+alias ident-off="mv ~/bin/ssh ~/bin/ssh.unused"
+alias clear_sss='for dc in 1 2; do ssh root@dc${dc}.idm.orionspace.com "systemctl stop sssd ; rm -rf /var/log/sssd/* /var/lib/sss/{db,mc}/* ; systemctl start sssd"; done'
+alias gtvv='git tag -n | sort -V'
+alias gcaa='git add .; git commit --verbose --all'
+alias gfp='git add *; git commit --fixup=HEAD; git push'
+alias gmv='git mv'
+alias gii='git init .'
+alias gundo='git reset --soft HEAD~1'
+alias gtree='git log --oneline --graph --decorate --all'
+alias grball='for branch in $(git branch | sed "s|[ *] ||g" | egrep -v "(main)"); do git checkout $branch && git rebase main && git checkout main; done'
+alias gpfa='git push --all --progress --force-with-lease'
+alias gpfA='git push --all --progress --prune --force-with-lease'
+#alias gitlab-runner='docker run --rm -t -i gitlab/gitlab-runner'
+#alias gitlab-runner='docker run -d --name gitlab-runner --restart always -v /Users/Shared/gitlab-runner/config:/etc/gitlab-runner -v /var/run/docker.sock:/var/run/docker.sock gitlab/gitlab-runner:latest'
+# alias inv2ssh='pushd ~/Documents/code/orion/ansible; ansible-playbook playbooks/inv-to-ssh.yml; popd'
+# alias sat2ssh='pushd ~/Documents/code/orion/ansible; ansible-playbook playbooks/satellite/satellite-user-host-mapping.yml; popd'
+alias yaml2json='yq -p yaml -o json'
+alias json2yaml='yq -p json -o yaml'
+# alias cro='change_resolvers.sh orion'
+# alias crno='change_resolvers.sh'
+# alias sedit='open . -a /Applications/Sublime\ Text.app'
+# alias tm1='ssh lt24001.idm.orionspace.com'
+#alias tm3='ssh lt22003.idm.orionspace.com'
+# alias ocnt="cd ~/Documents/code/orion/containers/"
+# alias pcnt="cd ~/Documents/code/personal/containers/"
+alias pbcopykey="pbcopy < ~/.ssh/identities/crexendo/id_ed25519.pub"
+alias ocikey="pbcopy < ~/.ssh/identities/crexendo/oci.pub"
+# alias keeper=/Users/elliott/Documents/code/keeper/bin/keeper
+alias ksm=/Users/elliott/Documents/code/keeper/bin/ksm
+alias kp=keeper
+alias cz=chezmoi
+alias k=kubectl
+alias be='base64'
+alias bd='base64 -d'
+
+#which python &> /dev/null || alias python=/usr/local/bin/python3
+which pip &> /dev/null || alias pip=pip3
+alias gpaf='git push --all --force-with-lease'
+
+alias from_ansible="pbpaste | sed -e 's|^ *||' -e 's|: |=|g' | tr '\n' ' '"
+alias gh='GH_PAGER= gh'

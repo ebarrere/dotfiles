@@ -1,0 +1,138 @@
+function get_external_ip {
+  curl https://ifconfig.me 2> /dev/null
+}
+function add_ksm_ip {
+  INI_FILE=~/.keeper/keeper.ini
+  APP_NAME=$1
+  KSM_TOKEN=$(keeper secrets-manager client add --app ${APP_NAME} --name $(hostname -s)-$(get_external_ip) | awk -F': ' '/One-Time Access Token/ {print $2}' )
+  ksm profile init -p ${APP_NAME}_$(get_external_ip) --ini-file ${INI_FILE} -t $KSM_TOKEN
+}
+function add_ksm_ip_json {
+  JSON_FILE_PREFIX=keeper
+  APP_NAME=$1
+  keeper secrets-manager client add --app ${APP_NAME} --config-init json --name $(hostname -s)-$(get_external_ip)-${APP_NAME} | awk -F'Initialized Config: ' '/Initialized Config:/ {print $2}' > ${JSON_FILE_PREFIX}-$(get_external_ip).json
+  chmod 600 ${JSON_FILE_PREFIX}-$(get_external_ip).json
+  ln -sf ${JSON_FILE_PREFIX}-$(get_external_ip).json ${JSON_FILE_PREFIX}.json
+}
+function lnksm {
+  test -L ksm_config.json && ln -sf ksm_config{_$(get_external_ip),}.json
+  test -L client_config.json && ln -sf client_config{_$(get_external_ip),}.json
+  test -L client-config.json && ln -sf client-config{-$(get_external_ip),}.json
+}
+function keeper_search {
+    keeper l --format json | jq -r --arg APPNAME "$1" '.[] | select(.title == $APPNAME).record_uid'
+}
+function brew_find_pkg {
+
+    local cmds_to_search="$@"
+    local brew_bin=$( brew --prefix )/bin
+    for cmd in $cmds_to_search ; do
+        if [ -L $brew_bin/$cmd ] ; then
+            ls -l $brew_bin/$cmd |cut -f 2 -d '>'
+        else
+            echo "$cmd is not a brew command"
+        fi
+    done
+}
+
+function mkpdmachine {
+  local OLD_MACHINE_NAME="$(podman machine list | awk '/Currently running/ {print $1}' | tr -d '*')"
+  podman machine stop ${OLD_MACHINE_NAME}
+  local MACHINE_NAME=$1
+  local EXPORT_PATH=$(realpath $2)
+  podman machine init --now ${MACHINE_NAME} -v ${EXPORT_PATH}:${EXPORT_PATH}
+  podman system connection default ${MACHINE_NAME}
+}
+
+function mkcollection {
+  local COLLECTION_NAME=$1
+  #COLLECTION_DIR=~/Documents/code/orion/ansible/collections/ansible_collections
+  COLLECTION_DIR=~/Documents/code/orion/ansible_collections
+  local COLLECTION_PATH="${COLLECTION_DIR}/${COLLECTION_NAME/.//}"
+  #local COLLECTION_PATH="${COLLECTION_DIR}/${COLLECTION_NAME}"
+  local ANSIBLE_BIN_PATH="/Users/elliott/Documents/code/orion/ansible_runtime/bin"
+  #echo $COLLECTION_PATH
+  #return 0
+  if [ -d $COLLECTION_PATH ]; then
+    echo "Path exists: $COLLECTION_PATH"
+    return 2
+  else
+    pushd $COLLECTION_DIR &> /dev/null
+    ${ANSIBLE_BIN_PATH}/ansible-galaxy collection init $COLLECTION_NAME
+    pushd $COLLECTION_PATH &> /dev/null
+    git init .
+    popd -q
+    popd -q
+  fi
+}
+
+function usepdmachine {
+  local OLD_MACHINE_NAME="$(podman machine list | awk '/Currently running/ {print $1}' | tr -d '*')"
+  podman machine stop ${OLD_MACHINE_NAME}
+  local MACHINE_NAME=$1
+  podman machine start ${MACHINE_NAME}
+  podman system connection default ${MACHINE_NAME}
+}
+
+function k8s_node_ips {
+  kubectl get nodes -o json | jq -r '.items[].status.addresses[] | select(.type == "InternalIP").address'
+}
+
+function k8s_exec {
+  for ip in $(k8s_node_ips); do
+    ssh ${ip} $@
+  done
+}
+
+function krm {
+  sed -e "${1}d" -i.bak ~/.ssh/known_hosts
+}
+
+function user_to_hostname {
+  ls -1 ~/.ssh/config.d/orion_from_ansible/*${1}* | sed 's|.*-||g'
+}
+
+function holmes_key {
+  ksm --profile-name ${APP_NAME}_$(get_external_ip) secret get Nli4rZRUEFOuE-Db5aw1fA --raw --json -q "$.fields[?(@.label=='password')].value[*]"
+}
+
+function load_ssh_keys {
+  APP_NAME=ssh_keys
+  for r in $(ksm -p ${APP_NAME}_$(get_external_ip) secret list --json | jq -r '.[] | select(.record_type=="sshKeys") | .uid' ); do ssh-add - <<< $(ksm -p ${APP_NAME}_$(get_external_ip) secret get ${r} --json -f keyPair | jq -r '.privateKey'); done
+}
+
+function mkpyenv() {
+    ENV_NAME=${1:-.venv}  # Default to .venv if no name provided
+    PYTHON_VERSION=$2
+
+    if [[ -e "${ENV_NAME}" ]]; then
+        echo "Error: Path already exists: ${ENV_NAME}" >&2
+        return 1
+    fi
+
+    if [ -n "$PYTHON_VERSION" ]; then
+        uv venv "$ENV_NAME" --python "$PYTHON_VERSION"
+    else
+        uv venv "$ENV_NAME"
+    fi
+
+    # uv automatically handles direnv if .envrc exists
+    echo "source ${ENV_NAME}/bin/activate" >> .envrc
+    direnv allow
+
+    if [ -r requirements.txt ]; then
+        uv pip install -r requirements.txt
+    fi
+}
+
+function oci_list_compartments {
+  pushd ~/code/infrastructure-scripts/ &> /dev/null
+  if [ $# -eq 0 ]; then
+    ./oci-scripts/list_compartments.py --profile DEFAULT --root-compartment-id ocid1.compartment.oc1..aaaaaaaangm3ah7nvgt5qtexeqlgkrvmwd7kmjxwkzuh6qjuqfqjtlcitzbq
+  elif [ "$1" = "root" ]; then
+    ./oci-scripts/list_compartments.py --profile DEFAULT --root-compartment-id ocid1.tenancy.oc1..aaaaaaaa24x7yyoqf2tanehmcesu4blmyxhp7vjnskh277brmhe5d5vfz77a
+  else
+    ./oci-scripts/list_compartments.py $@
+  fi
+  popd &> /dev/null
+}
