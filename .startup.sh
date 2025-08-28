@@ -8,6 +8,7 @@ install_on_linux() {
     else
         sh <(curl -L https://nixos.org/nix/install) --daemon
     fi
+    install_chezmoi
 }
 
 install_on_mac() {
