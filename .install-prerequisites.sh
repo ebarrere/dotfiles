@@ -1,9 +1,7 @@
 #!/bin/bash
 # set -ex
 
-if type keeper &>/dev/null && type bw &>/dev/null; then
-    echo "Keeper and Bitwarden already installed"
-else
+if !type keeper &>/dev/null || !type bw &>/dev/null; then
     case "$(uname -s)" in
     Darwin)
         brew install keeper-commander

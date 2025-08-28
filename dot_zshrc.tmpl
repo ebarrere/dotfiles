@@ -128,4 +128,4 @@ compinit
 # <<<<  Vagrant command completion (end)
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /Users/elliott/.tenv/Terraform/1.11.1/terraform terraform
+complete -o nospace -C {{ $.chezmoi.homeDir }}/.tenv/Terraform/1.11.1/terraform terraform

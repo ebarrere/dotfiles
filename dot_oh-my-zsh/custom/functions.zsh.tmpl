@@ -50,7 +50,7 @@ function mkcollection {
   COLLECTION_DIR=~/Documents/code/orion/ansible_collections
   local COLLECTION_PATH="${COLLECTION_DIR}/${COLLECTION_NAME/.//}"
   #local COLLECTION_PATH="${COLLECTION_DIR}/${COLLECTION_NAME}"
-  local ANSIBLE_BIN_PATH="/Users/elliott/Documents/code/orion/ansible_runtime/bin"
+  local ANSIBLE_BIN_PATH="{{ $.chezmoi.homeDir }}/Documents/code/orion/ansible_runtime/bin"
   #echo $COLLECTION_PATH
   #return 0
   if [ -d $COLLECTION_PATH ]; then
