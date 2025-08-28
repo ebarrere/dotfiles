@@ -1,0 +1,14 @@
+{{ if eq .chezmoi.os "darwin" }}
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ range .packages.universal.taps -}}
+tap {{ . | quote | replace " " "\", \"" }}
+{{ end -}}
+{{ range .packages.universal.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .packages.universal.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+
+{{ end -}}
