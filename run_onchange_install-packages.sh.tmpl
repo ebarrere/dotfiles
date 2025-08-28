@@ -10,7 +10,7 @@ cask {{ . | quote }}
 EOF
 
 {{ else if eq .chezmoi.os "linux" -}}
-{{- if .packages.linux.apt }}
+{{- if and (hasKey .packages "linux") (hasKey .packages.linux "apt") }}
 if command -v apt-get >/dev/null 2>&1; then
     echo "Installing apt packages..."
     sudo apt-get update
@@ -20,7 +20,7 @@ if command -v apt-get >/dev/null 2>&1; then
 fi
 {{- end }}
 
-{{- if .packages.linux.nixpkgs }}
+{{- if and (hasKey .packages "linux") (hasKey .packages.linux "nixpkgs") }}
 if command -v nix-env >/dev/null 2>&1; then
     echo "Installing Nix packages..."
     {{- range .packages.linux.nixpkgs }}
