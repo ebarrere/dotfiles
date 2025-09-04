@@ -4,6 +4,10 @@ README.md
 {{- if not (has .chezmoi.hostname $ebHosts) }}
 .oh-my-zsh/custom/sensitive.zsh
 {{- end }}
+{{- if eq .chezmoi.hostname "shiny" }}
+.oh-my-zsh/custom/keeper_ssh_agent.zsh
+.oh-my-zsh/custom/cdpath.zsh
+{{- end }}
 {{ if ne .chezmoi.os "darwin" -}}
 .oh-my-zsh/custom/brew.zsh
 {{- end}}

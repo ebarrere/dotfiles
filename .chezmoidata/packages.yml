@@ -184,7 +184,6 @@ packages:
       - "tsh"
       - "utm"
       - "vagrant"
-      - "virtualbox"
       - "yubico-authenticator"
   linux:
     nixpkgs:
