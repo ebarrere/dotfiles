@@ -116,8 +116,9 @@ function mkpyenv() {
         uv venv "$ENV_NAME"
     fi
 
-    # uv automatically handles direnv if .envrc exists
-    echo "source ${ENV_NAME}/bin/activate" >> .envrc
+    if ! grep -Eq "(source|\.) ${ENV_NAME}/bin/activate" .envrc; then
+      echo "source ${ENV_NAME}/bin/activate" >> .envrc
+    fi
     direnv allow
 
     if [ -r requirements.txt ]; then
