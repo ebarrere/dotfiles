@@ -188,3 +188,5 @@ packages:
   linux:
     nixpkgs:
       - "nixpkgs.zsh"
+      - "nixpkgs.python3"
+      - "nixpkgs.uv"
