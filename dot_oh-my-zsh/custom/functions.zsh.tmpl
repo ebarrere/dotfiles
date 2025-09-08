@@ -102,28 +102,35 @@ function load_ssh_keys {
 }
 
 function mkpyenv() {
-    ENV_NAME=${1:-.venv}  # Default to .venv if no name provided
-    PYTHON_VERSION=$2
+  ENV_NAME=${1:-.venv}  # Default to .venv if no name provided
+  PYTHON_VERSION=$2
 
-    if [[ -e "${ENV_NAME}" ]]; then
-        echo "Error: Path already exists: ${ENV_NAME}" >&2
-        return 1
-    fi
+  if [[ -e "${ENV_NAME}" ]]; then
+    echo "Error: Path already exists: ${ENV_NAME}" >&2
+    return 1
+  fi
 
-    if [ -n "$PYTHON_VERSION" ]; then
-        uv venv "$ENV_NAME" --python "$PYTHON_VERSION"
+  if [ -n "$PYTHON_VERSION" ]; then
+    PYARG="--python $PYTHON_VERSION"
+  fi
+  if ! type uv &> /dev/null; then
+    python -m venv "$ENV_NAME" $PYARG
+  else
+    uv venv "$ENV_NAME" $PYARG
+  fi
+
+  if ! grep -Eq "(source|\.) ${ENV_NAME}/bin/activate" .envrc; then
+    echo "source ${ENV_NAME}/bin/activate" >> .envrc
+  fi
+  direnv allow
+
+  if [ -r requirements.txt ]; then
+    if ! type uv &> /dev/null; then
+      python -m pip install -r requirements.txt
     else
-        uv venv "$ENV_NAME"
+      uv pip install -r requirements.txt
     fi
-
-    if ! grep -Eq "(source|\.) ${ENV_NAME}/bin/activate" .envrc; then
-      echo "source ${ENV_NAME}/bin/activate" >> .envrc
-    fi
-    direnv allow
-
-    if [ -r requirements.txt ]; then
-        uv pip install -r requirements.txt
-    fi
+  fi
 }
 
 function oci_list_compartments {
