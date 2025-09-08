@@ -3,20 +3,20 @@ user = ocid1.user.oc1..aaaaaaaaxknxwcqysdy55p33zuipdfix6ysqzigbxycfz4kvtbzjx33nw
 fingerprint = 0d:09:a4:a9:40:7d:1d:74:88:a9:5a:e0:f9:5d:2c:6b
 tenancy = ocid1.tenancy.oc1..aaaaaaaa24x7yyoqf2tanehmcesu4blmyxhp7vjnskh277brmhe5d5vfz77a
 region = us-ashburn-1
-key_file = /Users/elliott/.oci/oci_api_perm_key.pem
+key_file = {{ $.chezmoi.homeDir }}/.oci/oci_api_perm_key.pem
 
 [crexendocorp]
 tenancy = ocid1.tenancy.oc1..aaaaaaaamkhjnyzlxz4tkwzwqoi3if4dpb6ic6r2upxbxc6dmbe2ug3qs3jq
 user = ocid1.user.oc1..aaaaaaaal7rbyw5nvhbacrxioapvvlui32kbnpefgaqeeuoxldflftesixua
 fingerprint = 60:96:7a:e4:01:25:91:1d:7c:ef:94:57:0c:ef:33:45
-key_file = /Users/elliott/.oci/oci_api_key.pem
+key_file = {{ $.chezmoi.homeDir }}/.oci/oci_api_key.pem
 region = us-phoenix-1
 
 
 
 [cxdo2024]
 fingerprint=82:1b:3d:94:74:13:f6:8c:94:40:fb:d9:28:e8:8a:0e
-key_file=/Users/elliott/.oci/sessions/cxdo2024/oci_api_key.pem
+key_file={{ $.chezmoi.homeDir }}/.oci/sessions/cxdo2024/oci_api_key.pem
 tenancy=ocid1.tenancy.oc1..aaaaaaaa24x7yyoqf2tanehmcesu4blmyxhp7vjnskh277brmhe5d5vfz77a
 region=us-phoenix-1
-security_token_file=/Users/elliott/.oci/sessions/cxdo2024/token
+security_token_file={{ $.chezmoi.homeDir }}/.oci/sessions/cxdo2024/token
