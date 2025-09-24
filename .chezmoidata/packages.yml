@@ -44,6 +44,7 @@ packages:
       - "gnu-sed"
       - "gnu-tar"
       - "go"
+      - "gopass"
       - "gpgme"
       - "graphviz"
       - "gtk+"
@@ -114,6 +115,7 @@ packages:
       - "python@3.13"
       - "python@3.9"
       - "qemu"
+      - "qrtool"
       - "rbenv"
       - "rclone"
       - "serf"
@@ -147,6 +149,7 @@ packages:
       - "xq"
       - "ykman"
       - "yq"
+      # - "zbar"
       - "zenity"
       - "zsh-completions"
     casks:
