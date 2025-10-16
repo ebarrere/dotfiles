@@ -119,7 +119,7 @@ function mkpyenv() {
     uv venv "$ENV_NAME" $PYARG
   fi
 
-  if ! grep -Eq "(source|\.) ${ENV_NAME}/bin/activate" .envrc; then
+  if ! grep -Eq "(source|\.) ${ENV_NAME}/bin/activate" .envrc 2>/dev/null; then
     echo "source ${ENV_NAME}/bin/activate" >> .envrc
   fi
   direnv allow
