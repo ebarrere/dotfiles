@@ -184,6 +184,7 @@ packages:
       - "sublime-merge"
       - "sublime-text"
       - "transmission"
+      - "tailscale-app"
       - "tsh"
       - "utm"
       - "vagrant"
