@@ -84,7 +84,7 @@ packages:
       - "links"
       - "lynx"
       - "magic-wormhole"
-      - "marp"
+      - "marp-cli"
       - "minikube"
       - "molecule"
       - "moreutils"
