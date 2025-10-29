@@ -160,6 +160,7 @@ packages:
       - "bettertouchtool"
       - "choosy"
       - "claude"
+      - "claude-code"
       - "corelocationcli"
       - "cursor"
       - "evernote"
