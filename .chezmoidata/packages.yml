@@ -60,7 +60,6 @@ packages:
       - "iperf"
       - "iperf3"
       - "ipmitool"
-      - "isc-dhcp"
       - "jc"
       - "jd"
       - "jmeter"
