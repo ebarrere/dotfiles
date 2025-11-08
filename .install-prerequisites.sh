@@ -1,15 +1,27 @@
 #!/bin/bash
 # set -ex
 
-if !type keeper &>/dev/null || !type bw &>/dev/null; then
+missing_tools=()
+! type keeper &>/dev/null && missing_tools+=("keeper")
+! type bw &>/dev/null && missing_tools+=("bw")
+
+if [ "${#missing_tools[@]}" -gt 0 ]; then
     case "$(uname -s)" in
     Darwin)
-        brew install keeper-commander
-        brew install bitwarden-cli
+        if [[ " ${missing_tools[@]} " =~ " keeper " ]]; then
+            brew install keeper-commander
+        fi
+        if [[ " ${missing_tools[@]} " =~ " bw " ]]; then
+            brew install bitwarden-cli
+        fi
         ;;
     Linux)
-        nix-env -iA nixpkgs.keeper-commander
-        nix-env -iA nixpkgs.bitwarden-cli
+        if [[ " ${missing_tools[@]} " =~ " keeper " ]]; then
+            nix-env -iA nixpkgs.keeper-commander
+        fi
+        if [[ " ${missing_tools[@]} " =~ " bw " ]]; then
+            nix-env -iA nixpkgs.bitwarden-cli
+        fi
         ;;
     *)
         echo "unsupported OS"
