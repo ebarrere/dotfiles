@@ -9,7 +9,7 @@ function add_ksm_ip {
 }
 function add_ksm_ip_json {
   JSON_FILE_PREFIX=keeper
-  APP_NAME=$1
+  APP_NAME=workstation_ksm
   keeper secrets-manager client add --app ${APP_NAME} --config-init json --name $(hostname -s)-$(get_external_ip)-${APP_NAME} | awk -F'Initialized Config: ' '/Initialized Config:/ {print $2}' > ${JSON_FILE_PREFIX}-$(get_external_ip).json
   chmod 600 ${JSON_FILE_PREFIX}-$(get_external_ip).json
   ln -sf ${JSON_FILE_PREFIX}-$(get_external_ip).json ${JSON_FILE_PREFIX}.json
