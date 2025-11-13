@@ -35,8 +35,8 @@ function brew_find_pkg {
     done
 }
 
-get_awx_token {
-  KEEPER_RECORD_GUID
+function get_awx_token {
+  KEEPER_RECORD_GUID=JuF5GXA9zL5PotuhtPeXBw
   AWX_URL=${1:-https://awx.k8s.cxdohosted.com/}
   http --auth admin:"$(kp find-password ${KEEPER_RECORD_GUID})" --auth-type basic POST ${AWX_URL}/api/v2/tokens/ description="CLI token" scope="write" | jq -r .token
 }
