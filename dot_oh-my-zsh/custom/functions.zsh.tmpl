@@ -35,6 +35,12 @@ function brew_find_pkg {
     done
 }
 
+get_awx_token {
+  KEEPER_RECORD_GUID
+  AWX_URL=${1:-https://awx.k8s.cxdohosted.com/}
+  http --auth admin:"$(kp find-password ${KEEPER_RECORD_GUID})" --auth-type basic POST ${AWX_URL}/api/v2/tokens/ description="CLI token" scope="write" | jq -r .token
+}
+
 function mkpdmachine {
   local OLD_MACHINE_NAME="$(podman machine list | awk '/Currently running/ {print $1}' | tr -d '*')"
   podman machine stop ${OLD_MACHINE_NAME}
