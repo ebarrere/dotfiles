@@ -1,0 +1,37 @@
+# personal
+Host localhost 127.*.*.*
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+Host puppet.localhost
+  HostName localhost
+  User elliott
+  Port 2222
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /Users/elliott/.ssh/id_rsa
+  IdentitiesOnly yes
+  LogLevel FATAL
+Host pi pi.local pi.robots.local raspberrypi.local
+  #ProxyCommand ssh -W %h:%p t.0o0.bz
+  #HostName 192.168.50.25
+  IdentityFile ~/.ssh/identities/personal/id_rsa
+  User elliott
+  HostName raspberrypi.local
+Host sparkle
+  ProxyCommand ssh -W %h:%p t.0o0.bz
+  HostName 192.168.50.205
+Host corrosion corrosion.robots.local
+  IdentityFile /Users/elliott/.ssh/identities/personal/id_rsa
+  User elliott
+#Host 192.168.50.*
+  #ProxyCommand ssh -W %h:%p t.0o0.bz
+  #IdentityFile ~/.ssh/id_rsa
+  #User elliott
+Host n.0o0.bz mail.t.0o0.bz mail-new.t.0o0.bz
+  Port 2222
+Host t.0o0.bz
+  Port 5252
+  IdentityFile /Users/elliott/.ssh/identities/personal/id_rsa
+  User elliott
+  Host 75.166.50.136

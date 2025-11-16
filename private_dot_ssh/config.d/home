@@ -1,0 +1,22 @@
+Host debian
+  Port 2222
+  HostName localhost
+  User elliott
+Host pve1
+  User elliott
+  IdentityFile ~/.ssh/identities/personal/id_rsa
+  HostName 192.168.1.11
+Host pve2
+  User elliott
+  IdentityFile ~/.ssh/identities/personal/id_rsa
+  HostName 192.168.1.12
+Host pve3
+  User elliott
+  IdentityFile ~/.ssh/identities/personal/id_rsa
+  HostName 192.168.1.13
+Host 192.168.1.73 lt22001
+  User elliott.barrere.a@orionspace.com
+  ControlMaster no
+  IdentityFile ~/.ssh/identities/work/orion/id_rsa
+  VerifyHostKeyDNS yes
+  StrictHostKeyChecking ask

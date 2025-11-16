@@ -1,0 +1,9 @@
+Include config.d/*
+Include config.d/*/*
+
+Host *
+  ForwardAgent yes
+  ControlMaster auto
+  ControlPath ~/.ssh/cm_socket/%r@%h:%p
+  ServerAliveInterval 240
+  VisualHostKey no
