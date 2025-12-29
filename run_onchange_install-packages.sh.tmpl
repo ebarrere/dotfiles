@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 {{ if eq .chezmoi.os "darwin" -}}
 brew bundle --file=/dev/stdin <<EOF
 {{ range .packages.darwin.brews -}}
