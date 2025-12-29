@@ -27,6 +27,7 @@ install_brew() {
         echo 'Homebrew is already installed'
     else
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        chmod g-w /opt/homebrew/share
     fi
 }
 
