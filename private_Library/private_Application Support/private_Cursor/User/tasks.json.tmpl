@@ -4,7 +4,7 @@
     {
       "label": "Copy YAML Path",
       "type": "shell",
-      "command": "/Users/elliott/code/.env/bin/python",
+      "command": "{{ $.chezmoi.homeDir }}/code/.env/bin/python",
       "args": [
         "~/.cursor/scripts/copy-yaml-path.py",
         "${file}",
