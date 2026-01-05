@@ -1,0 +1,66 @@
+{
+    "files.trimTrailingWhitespace": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    // "editor.detectIndentation": false,
+    "window.commandCenter": 1,
+    "explorer.confirmDelete": false,
+    "git.autofetch": true,
+    "explorer.confirmDragAndDrop": false,
+    "git.confirmSync": false,
+    "editor.tabCompletion": "on",
+    "git.enableSmartCommit": true,
+    "window.newWindowDimensions": "maximized",
+    "window.restoreWindows": "all",
+    "window.zoomLevel": 0,
+    "yamlPathExtractor":{ "pathSeparator": "/" },
+    // "yaml.validate": true,
+    "yaml.completion": true,
+    "yaml.schemaStore.enable": true,
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/kustomization.json": "**/kustomization.yaml",
+        "Kubernetes": [
+            "k8s-gitops/**/*.yaml",
+            "!**/kustomization.yaml",
+            "kubernetes/**/*.yaml",
+            "**/manifests/**/*.yaml"
+        ],
+    },
+    "workbench.editorAssociations": {
+        "*.chat": "chat.preview"
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "files.exclude": {
+        "**/.trunk/*actions/": true,
+        "**/.trunk/*logs/": true,
+        "**/.trunk/*notifications/": true,
+        "**/.trunk/*out/": true,
+        "**/.trunk/*plugins/": true
+    },
+    "files.watcherExclude": {
+        "**/.trunk/*actions/": true,
+        "**/.trunk/*logs/": true,
+        "**/.trunk/*notifications/": true,
+        "**/.trunk/*out/": true,
+        "**/.trunk/*plugins/": true
+    },
+    "vs-kubernetes": {
+        "vs-kubernetes.crd-code-completion": "enabled",
+        "vs-kubernetes.kubeconfig": "",
+        "vs-kubernetes.kubectl-path": "/opt/homebrew/bin/kubectl"
+    },
+    "containers.commands.build": "${containerCommand} build --pull --rm -f \"${dockerfile}\" -t ${tag} \"${context}\"",
+    "containers.containerClient": "com.microsoft.visualstudio.containers.podman",
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "gitlens.ai.model": "gitkraken",
+    "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
+    "gitlens.home.preview.enabled": false
+}
