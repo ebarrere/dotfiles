@@ -150,3 +150,14 @@ function oci_list_compartments {
   fi
   popd &> /dev/null
 }
+
+function fluxbranch {
+  pwd | grep -q 'k8s-gitops$' || return
+  env=$1
+  flux suspend source git flux-system --context ${env}
+  kubectl --context ${env} patch gitrepository flux-system -n flux-system --type=merge -p '{"spec":{"ref":{"branch":"temp"}}}'
+  gcb temp
+  yq -i '.spec.ref.branch = "temp"' clusters/overlays/dev/flux-system/gotk-sync.yaml
+  ga clusters/overlays/dev/flux-system/gotk-sync.yaml && gc -m "Change ${env} to temp branch" && gp
+  flux resume source git flux-system --context ${env}
+}

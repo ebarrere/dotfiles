@@ -62,5 +62,6 @@
     },
     "gitlens.ai.model": "gitkraken",
     "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
-    "gitlens.home.preview.enabled": false
+    "gitlens.home.preview.enabled": false,
+    "claudeCode.preferredLocation": "sidebar"
 }
