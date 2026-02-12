@@ -63,5 +63,6 @@
     "gitlens.ai.model": "gitkraken",
     "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
     "gitlens.home.preview.enabled": false,
-    "claudeCode.preferredLocation": "sidebar"
+    "claudeCode.preferredLocation": "sidebar",
+    "atlascode.jira.enabled": true
 }
