@@ -1,0 +1,5 @@
+#!/bin/bash
+if ! grep -qE '[A-Z]+-[0-9]+' "$1"; then
+  echo "ERROR: Commit message must include a Jira ticket (e.g., PROJ-123)"
+  exit 1
+fi
