@@ -151,9 +151,32 @@ function oci_list_compartments {
   popd &> /dev/null
 }
 
+function ansible-runner() {
+  local awx_ee_image
+  if [ "${use_kubectl}" = "true" ]; then
+    echo "Getting AWX image using kubectl"
+    awx_ee_image=$(kubectl get deployment --context production -n awx awx-task -o json | \
+      jq -r '.spec.template.spec.containers[] | select(.name == "awx-ee") | .image')
+  else
+    echo "Falling back to quay.io/ansible/awx-ee:latest"
+    awx_ee_image=quay.io/ansible/awx-ee:latest
+  fi
+
+  podman run --rm -it \
+    -v "${RUNNER_DIR:-$PWD}:/runner:Z" \
+    -v "${SSH_PRIVATE_KEY:-$HOME/.ssh/identities/crexendo/awx_dev}:/runner/private_key:ro" \
+    "$awx_ee_image" \
+    ansible-runner "$@"
+}
+
 function fluxbranch {
   pwd | grep -q 'k8s-gitops$' || return
   env=$1
+  branch=$(gb | awk '/^\*/ {print $NF}')
+  if [ $branch == "main" ]; then
+    echo "Branch is main"
+    return
+  fi
   flux suspend source git flux-system --context ${env}
   kubectl --context ${env} patch gitrepository flux-system -n flux-system --type=merge -p '{"spec":{"ref":{"branch":"temp"}}}'
   gcb temp
