@@ -10,8 +10,10 @@ fi
 [[ -z "$PROTECTED_PATHS" ]] && exit 0
 
 if git diff --cached --name-only | grep -qE "$PROTECTED_PATHS"; then
-  if ! grep -qE '[A-Z]+-[0-9]+' "$1"; then
-    echo "ERROR: Commits touching protected paths must include a Jira ticket key (e.g. SRE-123)"
+  # Allow if either the commit message OR current branch name contains a Jira ticket number
+  branch_name=$(git rev-parse --abbrev-ref HEAD)
+  if ! grep -qE '[A-Z]+-[0-9]+' "$1" && ! [[ "$branch_name" =~ [A-Z]+-[0-9]+ ]]; then
+    echo "ERROR: Commits touching protected paths must include a Jira ticket key (e.g. SRE-123) in the commit message or branch name"
     exit 1
   fi
 fi
