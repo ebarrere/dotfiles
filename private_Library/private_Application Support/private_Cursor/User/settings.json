@@ -65,5 +65,11 @@
     "gitlens.home.preview.enabled": false,
     "claudeCode.preferredLocation": "sidebar",
     "atlascode.jira.enabled": true,
-    "atlascode.jira.statusbar.enabled": true
+    "atlascode.jira.statusbar.enabled": true,
+    "atlascode.jira.lastCreatePreSelectedValues": {
+        "siteId": "d5a80b53-1057-4790-9703-d238baa6fb4f",
+        "projectKey": "AP",
+        "issueTypeId": ""
+    },
+    "atlascode.bitbucket.enabled": false
 }
