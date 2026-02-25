@@ -174,13 +174,9 @@ function fluxbranch {
   env=$1
   [[ "$env" ]] || return
   branch=$(gb | awk '/^\*/ {print $NF}')
-  if [ $branch = "main" ]; then
-    echo "Branch is main"
-    return
-  fi
   flux suspend source git flux-system --context ${env}
   kubectl --context ${env} patch gitrepository flux-system -n flux-system --type=merge -p "{\"spec\":{\"ref\":{\"branch\":\"${branch}\"}}}"
-  yq -i '.spec.ref.branch = "${branch}"' clusters/overlays/dev/flux-system/gotk-sync.yaml
+  yq -i ".spec.ref.branch = \"${branch}\"" clusters/overlays/dev/flux-system/gotk-sync.yaml
   ga clusters/overlays/dev/flux-system/gotk-sync.yaml && gc -m "Change ${env} to ${branch} branch" && gp
   flux resume source git flux-system --context ${env}
 }
