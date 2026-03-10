@@ -101,6 +101,7 @@ packages:
       - "pcre"
       - "php"
       - "pinentry-mac"
+      - "pngpaste"
       - "podman"
       - "popt"
       - "portaudio"
