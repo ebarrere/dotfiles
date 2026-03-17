@@ -173,7 +173,7 @@ function fluxbranch {
   pwd | grep -q 'k8s-gitops$' || return
   env=$1
   [[ "$env" ]] || return
-  branch=$(gb | awk '/^\*/ {print $NF}')
+  branch=$(git branch --show-current)
   flux suspend source git flux-system --context ${env}
   kubectl --context ${env} patch gitrepository flux-system -n flux-system --type=merge -p "{\"spec\":{\"ref\":{\"branch\":\"${branch}\"}}}"
   yq -i "select(.kind == \"GitRepository\").spec.ref.branch = \"${branch}\"" clusters/overlays/${env}/flux-system/gotk-sync.yaml

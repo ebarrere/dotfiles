@@ -71,5 +71,6 @@
         "projectKey": "AP",
         "issueTypeId": ""
     },
-    "atlascode.bitbucket.enabled": false
+    "atlascode.bitbucket.enabled": false,
+    "atlascode.rovodev.showEntitlementNotifications": false,
 }
