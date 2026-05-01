@@ -162,7 +162,6 @@ packages:
       - "claude"
       - "claude-code"
       - "corelocationcli"
-      - "cursor"
       - "evernote"
       - "github"
       - "grandperspective"
@@ -190,6 +189,7 @@ packages:
       - "tsh"
       - "utm"
       - "vagrant"
+      - "visual-studio-code"
       - "yubico-authenticator"
   linux:
     nixpkgs:
