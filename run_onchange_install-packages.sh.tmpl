@@ -29,3 +29,7 @@ if command -v nix-env >/dev/null 2>&1; then
 fi
 {{- end }}
 {{- end }}
+
+{{ range .packages.npm -}}
+    npm install -g {{ . | quote }}
+{{ end -}}

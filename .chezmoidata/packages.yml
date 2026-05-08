@@ -196,3 +196,7 @@ packages:
       - "nixpkgs.zsh"
       - "nixpkgs.python3"
       - "nixpkgs.uv"
+  npm:
+    - "@env0/cli"
+    - "@mermaid-js/mermaid-cli"
+    - "@neuledge/context"

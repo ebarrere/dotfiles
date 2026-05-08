@@ -3,5 +3,8 @@
   "feedbackSurveyState": {
     "lastShownTime": 1759878778383
   },
-  "DISABLE_AUTOUPDATER": 1
+  "DISABLE_AUTOUPDATER": 1,
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
+  }
 }
