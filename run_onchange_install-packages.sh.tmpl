@@ -30,6 +30,11 @@ fi
 {{- end }}
 {{- end }}
 
-{{ range .packages.npm -}}
-    npm install -g {{ . | quote }}
+# {{ range .packages.npm -}}
+#     npm install -g {{ . | quote }}
+# {{ end -}}
+npm install -g {{ .packages.npm | join " " }}
+
+{{ range .packages.code_extensions -}}
+    code --install-extension {{ . | quote }}
 {{ end -}}
