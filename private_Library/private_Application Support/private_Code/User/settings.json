@@ -13,7 +13,9 @@
     "window.newWindowDimensions": "maximized",
     "window.restoreWindows": "all",
     "window.zoomLevel": 0,
-    "yamlPathExtractor":{ "pathSeparator": "/" },
+    "yamlPathExtractor": {
+        "pathSeparator": "/"
+    },
     // "yaml.validate": true,
     "yaml.completion": true,
     "yaml.schemaStore.enable": true,
@@ -30,20 +32,20 @@
         "*.chat": "chat.preview"
     },
     "diffEditor.ignoreTrimWhitespace": false,
-    "files.exclude": {
-        "**/.trunk/*actions/": true,
-        "**/.trunk/*logs/": true,
-        "**/.trunk/*notifications/": true,
-        "**/.trunk/*out/": true,
-        "**/.trunk/*plugins/": true
-    },
-    "files.watcherExclude": {
-        "**/.trunk/*actions/": true,
-        "**/.trunk/*logs/": true,
-        "**/.trunk/*notifications/": true,
-        "**/.trunk/*out/": true,
-        "**/.trunk/*plugins/": true
-    },
+    // "files.exclude": {
+    //     "**/.trunk/*actions/": true,
+    //     "**/.trunk/*logs/": true,
+    //     "**/.trunk/*notifications/": true,
+    //     "**/.trunk/*out/": true,
+    //     "**/.trunk/*plugins/": true
+    // },
+    // "files.watcherExclude": {
+    //     "**/.trunk/*actions/": true,
+    //     "**/.trunk/*logs/": true,
+    //     "**/.trunk/*notifications/": true,
+    //     "**/.trunk/*out/": true,
+    //     "**/.trunk/*plugins/": true
+    // },
     "vs-kubernetes": {
         "vs-kubernetes.crd-code-completion": "enabled",
         "vs-kubernetes.kubeconfig": "",
@@ -77,11 +79,14 @@
     "atlascode.rovodev.showEntitlementNotifications": false,
     "gitlens.mode.active": "zen",
     "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
-    "editor.defaultFormatter": "trunk.io",
-    "editor.find.seedSearchStringFromSelection": true,
+    // "editor.defaultFormatter": "trunk.io",
+    "editor.find.seedSearchStringFromSelection": "selection",
     "editor.fontSize": 13,
     "editor.formatOnPaste": true,
     "editor.multiCursorModifier": "ctrlCmd",
     "editor.snippetSuggestions": "top",
     "workbench.colorTheme": "Monokai",
+    "settingsSync.ignoredSettings": [],
+    "claudeCode.enableNewConversationShortcut": true,
+    "claudeCode.useTerminal": true,
 }

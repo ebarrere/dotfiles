@@ -1,5 +1,7 @@
 {
+  "model": "opus[1m]",
   "alwaysThinkingEnabled": true,
+  "skipAutoPermissionPrompt": true,
   "feedbackSurveyState": {
     "lastShownTime": 1759878778383
   },

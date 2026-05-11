@@ -6,10 +6,6 @@
         "args": "Copy YAML Path"
     },
     {
-        "key": "ctrl+cmd+l",
-        "command": "aichat.newchataction"
-    },
-    {
         "key": "cmd+l",
         "command": "-aichat.newchataction"
     },
@@ -61,5 +57,15 @@
         "key": "alt+d",
         "command": "-aidebug.autodebugterminal",
         "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+cmd+l",
+        "command": "workbench.action.closeAuxiliaryBar",
+        "when": "activeWebviewPanelId == 'claudeVSCodePanel' || claude-vscode.sideBarActive && !editorFocus && !panelFocus"
+    },
+    {
+        "key": "ctrl+cmd+l",
+        "command": "claude-vscode.sidebar.open",
+        "when": "!(activeWebviewPanelId == 'claudeVSCodePanel' || claude-vscode.sideBarActive && !editorFocus && !panelFocus)"
     }
 ]
