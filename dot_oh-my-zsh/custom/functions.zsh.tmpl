@@ -170,7 +170,7 @@ function ansible-runner() {
 }
 
 function fluxbranch {
-  pwd | grep -q 'k8s-gitops$' || return
+  pwd | grep -q 'k8s-gitops' || return
   env=$1
   [[ "$env" ]] || return
   branch=$(git branch --show-current)
