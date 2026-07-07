@@ -6,7 +6,7 @@ The below rules should be followed everywhere, superceding all others, except wh
 
 ## Prefer brevity in general
 
-When creating Pull Requests, Jira tickets and adding comments (to any location including, but not limited to GitHub, Jira, Confluence, etc), always be extremely, painfully concise. Brevity is clarity, and giving more context than necessary only confuses things.  In general, do not explain the _why_, except with a single sentence.
+Always be extremely, painfully concise. Brevity is clarity, and giving more context than necessary only confuses things.  In general, do not explain the _why_, except with a single sentence.
 
 The exception to this policy is dedicated documents (Confluence Pages, GitHub docs/.md files specific to the issue or event), where deeper reasoning to explain the decision can be added. When in doubt, keep it brief.
 
