@@ -118,7 +118,8 @@
       "Bash(sed -n *)",
       "Bash(tr *)",
       "Bash(curl -s *)",
-      "Bash(curl --silent *)"
+      "Bash(curl --silent *)",
+      "mcp__claude_ai_Atlassian"
     ],
     "deny": [
       "Bash(rm -rf /)",
