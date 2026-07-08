@@ -1,6 +1,8 @@
 {
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  },
   "permissions": {
-    "defaultMode": "bypassPermissions",
     "deny": [
       "Bash(rm -rf /)",
       "Bash(rm -rf ~)",
@@ -19,7 +21,8 @@
       "Bash(diskutil eraseDisk *)",
       "Bash(sudo nvram *)",
       "Bash(csrutil disable)"
-    ]
+    ],
+    "defaultMode": "bypassPermissions"
   },
   "model": "opus[1m]",
   "worktree": {
@@ -29,12 +32,10 @@
     "superpowers@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "skipAutoPermissionPrompt": true,
   "skipDangerousModePermissionPrompt": true,
+  "skipAutoPermissionPrompt": true,
   "feedbackSurveyState": {
     "lastShownTime": 1759878778383
   },
-  "env": {
-    "DISABLE_AUTOUPDATER": "1"
-  }
+  "tui": "fullscreen"
 }
