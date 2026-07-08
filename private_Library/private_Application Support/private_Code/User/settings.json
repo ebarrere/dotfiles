@@ -89,4 +89,5 @@
     "settingsSync.ignoredSettings": [],
     "claudeCode.enableNewConversationShortcut": true,
     "claudeCode.useTerminal": true,
+    "security.workspace.trust.untrustedFiles": "open",
 }

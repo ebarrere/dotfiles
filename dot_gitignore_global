@@ -41,3 +41,5 @@ Thumbs.db
 sftp-config.json
 sftp-config-alt*.json
 *.swp
+
+**/.claude/settings.local.json
