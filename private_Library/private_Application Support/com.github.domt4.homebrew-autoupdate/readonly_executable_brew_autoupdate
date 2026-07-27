@@ -1,0 +1,19 @@
+#!/bin/sh
+
+export HOMEBREW_NO_BOTTLE_SOURCE_FALLBACK=1
+export PATH=/opt/homebrew/Library/Homebrew/shims/shared:/Users/elliott/code/.env/bin:/Users/elliott/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/opt/X11/bin:/Applications/Wireshark.app/Contents/MacOS:/Applications/VMware\ Fusion.app/Contents/Public:/Applications/iTerm.app/Contents/Resources/utilities:/Users/elliott/.orbstack/bin:/Users/elliott/.local/share/containers/podman-desktop/extensions-storage/podman-desktop.compose/bin:/opt/homebrew/Library/Taps/domt4/homebrew-autoupdate/cmd
+export HOMEBREW_CACHE=/Users/elliott/Library/Caches/Homebrew
+export HOMEBREW_LOGS=/Users/elliott/Library/Logs/Homebrew
+export HOMEBREW_CASK_OPTS=--no-quarantine
+run_log=$(/usr/bin/mktemp "${TMPDIR:-/tmp}/brew-autoupdate.XXXXXX") || exit 1
+trap '/bin/rm -f "$run_log"' EXIT
+
+# Hold system awake (AC only) until this run finishes; see SRE notes on darkwake freezes
+/usr/bin/caffeinate -s -w $$ &
+
+/bin/date
+(/opt/homebrew/bin/brew update && /opt/homebrew/bin/brew upgrade --no-ask --formula -v && /opt/homebrew/bin/brew upgrade --no-ask --cask -v && /opt/homebrew/bin/brew cleanup) >"$run_log" 2>&1
+status=$?
+/bin/cat "$run_log"
+/opt/homebrew/Library/Taps/domt4/homebrew-autoupdate/notifier/notify.sh "$status" "$run_log" always /opt/homebrew/Library/Taps/domt4/homebrew-autoupdate/notifier/brew-autoupdate.app
+exit "$status"
