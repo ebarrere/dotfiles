@@ -72,8 +72,8 @@
     "atlascode.jira.statusbar.enabled": true,
     "atlascode.jira.lastCreatePreSelectedValues": {
         "siteId": "d5a80b53-1057-4790-9703-d238baa6fb4f",
-        "projectKey": "AP",
-        "issueTypeId": ""
+        "projectKey": "SRE",
+        "issueTypeId": "2"
     },
     "atlascode.bitbucket.enabled": false,
     "atlascode.rovodev.showEntitlementNotifications": false,
@@ -89,4 +89,12 @@
     "settingsSync.ignoredSettings": [],
     "claudeCode.enableNewConversationShortcut": true,
     "claudeCode.useTerminal": true,
+    "yaml.disableSchemaDetection": [
+        "**/.github/workflows/*.yml",
+        "**/.github/workflows/*.yaml",
+        "**/.gitea/workflows/*.yml",
+        "**/.gitea/workflows/*.yaml",
+        "**/.forgejo/workflows/*.yml",
+        "**/.forgejo/workflows/*.yaml"
+    ],
 }
