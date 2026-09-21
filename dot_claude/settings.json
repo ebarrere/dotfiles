@@ -1,12 +1,152 @@
 {
-  "env": {
-    "DISABLE_AUTOUPDATER": "1"
+  "agentPushNotifEnabled" : true,
+  "alwaysThinkingEnabled" : true,
+  "autoContinueAtUsageLimit" : true,
+  "cleanupPeriodDays" : 365,
+  "enabledPlugins" : {
+    "sre-runbooks@crexendo-sre" : true,
+    "superpowers@claude-plugins-official" : true
   },
-  "permissions": {
-    "deny": [
-      "Bash(rm -rf /)",
+  "env" : {
+    "DISABLE_AUTOUPDATER" : "1"
+  },
+  "extraKnownMarketplaces" : {
+    "crexendo-sre" : {
+      "source" : {
+        "repo" : "crexendo-cloudops\/kb",
+        "source" : "github"
+      }
+    }
+  },
+  "feedbackSurveyState" : {
+    "lastShownTime" : 1759878778383
+  },
+  "hooks" : {
+    "Notification" : [
+      {
+        "hooks" : [
+          {
+            "command" : "\/Users\/elliott\/.config\/iterm2\/cc-status",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest" : [
+      {
+        "hooks" : [
+          {
+            "command" : "\/Users\/elliott\/.config\/iterm2\/cc-status",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "PostToolUse" : [
+      {
+        "hooks" : [
+          {
+            "command" : "\/Users\/elliott\/.config\/iterm2\/cc-status",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "PreToolUse" : [
+      {
+        "hooks" : [
+          {
+            "command" : "f=$(jq -r '.tool_input.file_path \/\/ empty' 2>\/dev\/null); [ -z \"$f\" ] && exit 0; d=$(dirname \"$f\"); gd=$(git -C \"$d\" rev-parse --absolute-git-dir 2>\/dev\/null) || exit 0; gcd=$(git -C \"$d\" rev-parse --path-format=absolute --git-common-dir 2>\/dev\/null) || exit 0; [ \"$gd\" = \"$gcd\" ] && { echo \"Edits must be made in a dedicated git worktree (one worktree = one branch = one agent). Run EnterWorktree to create a fresh, uniquely-named worktree on its own branch before editing.\" >&2; exit 2; }; exit 0",
+            "type" : "command"
+          }
+        ],
+        "matcher" : "Edit|Write|MultiEdit|NotebookEdit"
+      },
+      {
+        "hooks" : [
+          {
+            "command" : "\/Users\/elliott\/.config\/iterm2\/cc-status",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "SessionEnd" : [
+      {
+        "hooks" : [
+          {
+            "command" : "bash ~\/.claude\/hooks\/worktree-cleanup.sh 2>\/dev\/null || true",
+            "type" : "command"
+          }
+        ]
+      },
+      {
+        "hooks" : [
+          {
+            "command" : "\/Users\/elliott\/.config\/iterm2\/cc-status",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "SessionStart" : [
+      {
+        "hooks" : [
+          {
+            "command" : "\/Users\/elliott\/.config\/iterm2\/cc-status",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "Stop" : [
+      {
+        "hooks" : [
+          {
+            "command" : "\/Users\/elliott\/.config\/iterm2\/cc-status",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "StopFailure" : [
+      {
+        "hooks" : [
+          {
+            "command" : "\/Users\/elliott\/.config\/iterm2\/cc-status",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "SubagentStop" : [
+      {
+        "hooks" : [
+          {
+            "command" : "\/Users\/elliott\/.config\/iterm2\/cc-status",
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit" : [
+      {
+        "hooks" : [
+          {
+            "command" : "\/Users\/elliott\/.config\/iterm2\/cc-status",
+            "type" : "command"
+          }
+        ]
+      }
+    ]
+  },
+  "model" : "opus[1m]",
+  "permissions" : {
+    "defaultMode" : "auto",
+    "deny" : [
+      "Bash(rm -rf \/)",
       "Bash(rm -rf ~)",
-      "Bash(rm -rf /*)",
+      "Bash(rm -rf \/*)",
       "Bash(rm -rf $HOME)",
       "Bash(chmod 777 *)",
       "Bash(chown -R *)",
@@ -17,25 +157,18 @@
       "Bash(eval *)",
       "Bash(sudo rm -rf *)",
       "Bash(mkfs *)",
-      "Bash(dd if=* of=/dev/*)",
+      "Bash(dd if=* of=\/dev\/*)",
       "Bash(diskutil eraseDisk *)",
       "Bash(sudo nvram *)",
       "Bash(csrutil disable)"
-    ],
-    "defaultMode": "bypassPermissions"
+    ]
   },
-  "model": "opus[1m]",
-  "worktree": {
-    "bgIsolation": "none"
-  },
-  "enabledPlugins": {
-    "superpowers@claude-plugins-official": true
-  },
-  "alwaysThinkingEnabled": true,
-  "skipDangerousModePermissionPrompt": true,
-  "skipAutoPermissionPrompt": true,
-  "feedbackSurveyState": {
-    "lastShownTime": 1759878778383
-  },
-  "tui": "fullscreen"
+  "remoteControlAtStartup" : false,
+  "skipAutoPermissionPrompt" : true,
+  "skipDangerousModePermissionPrompt" : true,
+  "switchModelsOnFlag" : true,
+  "tui" : "fullscreen",
+  "worktree" : {
+    "bgIsolation" : "worktree"
+  }
 }
