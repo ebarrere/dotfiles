@@ -1,0 +1,2 @@
+# Agent worktrees and scratch; chezmoi ignores dot-prefixed source entries.
+.claude/
