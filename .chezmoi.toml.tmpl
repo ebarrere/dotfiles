@@ -2,6 +2,9 @@
 [git]
     autoCommit = true
     autoPush = true
+[merge]
+    command = "code"
+    args = ["--wait", "--diff", "{{ `{{ .Destination }}` }}", "{{ `{{ .Source }}` }}"]
 [hooks.read-source-state.pre]
     command = ".local/share/chezmoi/.install-prerequisites.sh"
 [data]
