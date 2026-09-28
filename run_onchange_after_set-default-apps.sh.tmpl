@@ -1,0 +1,27 @@
+#!/bin/bash
+set -uo pipefail
+{{ if eq .chezmoi.os "darwin" -}}
+{{ if hasKey .default_apps "darwin" -}}
+
+# macOS 15+ shows a one-time consent prompt per app before it takes over a
+# document type, so a first run on a new machine is not unattended.
+if ! command -v duti >/dev/null 2>&1; then
+    echo "duti not found; skipping default-app assignment" >&2
+    exit 0
+fi
+
+rc=0
+{{ range $app := .default_apps.darwin }}
+# open -Ra resolves via LaunchServices, so the app need not be in /Applications.
+if open -Ra {{ $app.app | quote }} >/dev/null 2>&1; then
+    for t in {{ range $app.types }}{{ . | quote }} {{ end }}; do
+        duti -s {{ $app.bundle_id | quote }} "$t" all || { echo "duti failed: $t -> {{ $app.app }}" >&2; rc=1; }
+    done
+    echo "default handler -> {{ $app.app }}"
+else
+    echo "{{ $app.app }} not installed; skipping" >&2
+fi
+{{ end }}
+exit $rc
+{{ end -}}
+{{ end -}}

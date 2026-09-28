@@ -1,0 +1,17 @@
+# Applied by run_onchange_after_set-default-apps.sh.
+# bundle_id: osascript -e 'id of app "<App Name>"'
+# types: UTIs and/or bare extensions, as accepted by duti.
+default_apps:
+  darwin:
+    - app: "Markdown Preview"
+      bundle_id: "doc.md-preview"
+      types:
+        - "net.daringfireball.markdown"
+        - "net.ia.markdown"
+        - "md"
+        - "markdown"
+        - "mdown"
+        - "mkd"
+        - "mdwn"
+        - "mdtxt"
+        - "mdx"
