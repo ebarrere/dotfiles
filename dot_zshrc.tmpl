@@ -114,7 +114,7 @@ PS1='$(show_virtual_env)'$PS1
 # export ARCHFLAGS="-arch x86_64"
 
 # Zscaler TLS interception: aws CLI ignores the macOS keychain
-export AWS_CA_BUNDLE="$HOME/.aws/certs/ca-bundle-zscaler.pem"
+[[ -r "$HOME/.aws/certs/ca-bundle-zscaler.pem" ]] && export AWS_CA_BUNDLE="$HOME/.aws/certs/ca-bundle-zscaler.pem"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh

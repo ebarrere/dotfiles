@@ -1,0 +1,20 @@
+#!/bin/bash
+set -euo pipefail
+{{ if eq .chezmoi.os "darwin" -}}
+{{- $roots := output "sh" "-c" "security find-certificate -a -p /System/Library/Keychains/SystemRootCertificates.keychain 2>/dev/null; true" -}}
+{{- $zscaler := output "sh" "-c" "security find-certificate -c 'Zscaler Root CA' -p /Library/Keychains/System.keychain 2>/dev/null; true" -}}
+{{- if $zscaler -}}
+# roots: {{ $roots | sha256sum }}
+# zscaler: {{ $zscaler | sha256sum }}
+
+# AWS_CA_BUNDLE replaces botocore's trust store, so bundle system roots + Zscaler.
+out="$HOME/.aws/certs/ca-bundle-zscaler.pem"
+mkdir -p "$(dirname "$out")"
+tmp="$(mktemp)"
+security find-certificate -a -p /System/Library/Keychains/SystemRootCertificates.keychain > "$tmp"
+security find-certificate -c 'Zscaler Root CA' -p /Library/Keychains/System.keychain >> "$tmp"
+mv "$tmp" "$out"
+chmod 644 "$out"
+echo "aws CA bundle -> $out"
+{{- end }}
+{{ end -}}
