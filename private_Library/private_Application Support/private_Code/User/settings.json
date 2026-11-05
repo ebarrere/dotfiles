@@ -97,4 +97,5 @@
         "**/.forgejo/workflows/*.yml",
         "**/.forgejo/workflows/*.yaml"
     ],
+    "git.blame.editorDecoration.enabled": false,
 }
